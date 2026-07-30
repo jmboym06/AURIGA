@@ -1,8 +1,8 @@
 import sqlite3
 def createdb(connection):
-    cursor = connection.cursor()
+    cursor = connection.cursor()        # Cursor para editar la database
 
-    cursor.executescript('DROP TABLE IF EXISTS TELEMETRIA;')
+    cursor.executescript('DROP TABLE IF EXISTS TELEMETRIA;')    # Elimina cualquier registro anterior por si acaso
     cursor.executescript('' \
         'CREATE TABLE TELEMETRIA('\
         '   timestamp         INTEGER PRIMARY KEY,' \
@@ -12,5 +12,5 @@ def createdb(connection):
         '   temp_2            FLOAT ,'\
         '   proximidad        FLOAT ,' \
         '   voltaje           FLOAT ,'\
-        '   extra             FLOAT );')
+        '   extra             FLOAT );')                        # Crea la tabla con las columnas determinadas
     return()
