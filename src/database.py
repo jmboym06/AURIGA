@@ -1,8 +1,5 @@
-import sqlite3
                     # df = await websocket.recv()
-def database_add(datos, connection):
-
-    cursor = connection.cursor()        # Cursor para editar la database
+def database_add(datos, cursor):
 
     timestamp = datos["timestamp"]      # Extraemos los datos obtenidos en el JSON que manda el microcontrolador
     accel_x = datos["accel_x"]          # Se asignan a las variables determinadas

@@ -1,4 +1,3 @@
-import sqlite3
 def createdb(connection):
     cursor = connection.cursor()        # Cursor para editar la database
 
