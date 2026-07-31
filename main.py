@@ -19,21 +19,18 @@ connection2.commit()                             # Confirma el cambio
 
 dashboards = set()
 
-async def dashboard_handler(websocket):
-
+async def dashboard_handler(websocket):         # Añade las conexiones de dashboards al servidor
     dashboards.add(websocket)
-
     try:
-        await websocket.wait_closed()
+        await websocket.wait_closed()           # Mantiene a los dashboards que sigan conectados y elimina los que no
 
     finally:
         dashboards.discard(websocket)
 
 
 async def main_dash():
-
     async with websockets.serve(dashboard_handler, "0.0.0.0", 9000):      # Crea un servidor WebSocket que acepta conexiones desde cualquier interfaz de red
-
+        print("Servidor Dashboard conectado")
         await asyncio.Future()                                  # Mantiene vivo el servidor
 
 async def handler_micro(websocket_in):
@@ -60,6 +57,7 @@ async def handler_micro(websocket_in):
 async def main_micro():
 
     async with websockets.serve(handler_micro, "0.0.0.0", 8765):      # Crea un servidor WebSocket que acepta conexiones desde cualquier interfaz de red
+        print("Servidor microcontrolador conectado")
 
         await asyncio.Future()                                  # Mantiene vivo el servidor
 
