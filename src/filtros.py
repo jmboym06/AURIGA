@@ -14,12 +14,12 @@ class ButterworthFilter:                # Plantilla del filtro
 
         return filtered[0]              # Devuelve el primer y único valor filtrado
 
-imu_x = ButterworthFilter(200,20,4)          # Se hacen las especificaciones para cada sensor
-imu_y = ButterworthFilter(200,20,4) 
-voltage = ButterworthFilter(20,3,4)
-temperature1 = ButterworthFilter(10,1,4)
-temperature2 = ButterworthFilter(10,1,4)
-proximity = ButterworthFilter(20,3,4)
+imu_x = ButterworthFilter(200,20,2)          # Se hacen las especificaciones para cada sensor
+imu_y = ButterworthFilter(200,20,2) 
+voltage = ButterworthFilter(50,5,2)
+temperature1 = ButterworthFilter(5,1,2)
+temperature2 = ButterworthFilter(5,1,2)
+proximity = ButterworthFilter(30,5,2)
 extra = ButterworthFilter(20,1,4)
 
 def filtrado (datos):
