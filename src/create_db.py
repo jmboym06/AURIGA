@@ -7,9 +7,14 @@ def createdb(connection):
         '   timestamp         INTEGER PRIMARY KEY,' \
         '   accel_x           FLOAT ,' \
         '   accel_y           FLOAT ,' \
+        '   accel_z           FLOAT ,' \
+        '   gyro_x           FLOAT ,' \
+        '   gyro_y           FLOAT ,' \
+        '   gyro_z           FLOAT ,' \
         '   temp_1            FLOAT ,'\
         '   temp_2            FLOAT ,'\
         '   proximidad        FLOAT ,' \
         '   voltaje           FLOAT ,'\
+        '   event           FLOAT ,'\
         '   extra             FLOAT );')                        # Crea la tabla con las columnas determinadas
     return()

@@ -42,7 +42,20 @@ async def handler_micro(websocket_in):
 
             datosf = filtrado(datos)                           # Filtra los datos obtenidos con un filtro Butterworth determinado para cada sensor
 
+            if datosf["accel_x"] > 0.2:                        # Determinamos el evento que está ocurriendo en base a los datos filtrados de la IMU 
+                datosf["event"] = "Accelerating"
+            elif datosf["accel_x"] < -0.2:
+                datosf["event"] = "Braking"
+            else:
+                datosf["event"] = "None"
+
+            if datosf["accel_y"] > 0.2:
+                datosf["event"] += " & turning Left"
+            elif datosf["accel_y"] < -0.2:
+                datosf["event"] += " & turning Right"
+
             database_add(datosf, cursor2)              # Añade los datos de ese pack de datos a la database
+
 
             connection1.commit()                         # Confirma el cambio
             connection2.commit()

@@ -16,15 +16,23 @@ class ButterworthFilter:                # Plantilla del filtro
 
 imu_x = ButterworthFilter(200,20,2)          # Se hacen las especificaciones para cada sensor
 imu_y = ButterworthFilter(200,20,2) 
+imu_z = ButterworthFilter(200,20,2) 
+gyro_x = ButterworthFilter(200,20,2)          
+gyro_y = ButterworthFilter(200,20,2) 
+gyro_z = ButterworthFilter(200,20,2)
 voltage = ButterworthFilter(50,5,2)
-temperature1 = ButterworthFilter(5,1,2)
-temperature2 = ButterworthFilter(5,1,2)
+temperature1 = ButterworthFilter(5,0.5,2)
+temperature2 = ButterworthFilter(5,0.5,2)
 proximity = ButterworthFilter(30,5,2)
 extra = ButterworthFilter(20,1,4)
 
 def filtrado (datos):
     datos["accel_x"] = imu_x.update(datos["accel_x"])                 # Se filtra cada uno dependiendo el sensor
     datos["accel_y"] = imu_y.update(datos["accel_y"])
+    datos["accel_z"] = imu_z.update(datos["accel_z"])                 
+    datos["gyro_x"] = gyro_x.update(datos["gyro_x"])
+    datos["gyro_y"] = gyro_y.update(datos["gyro_y"])
+    datos["gyro_z"] = gyro_z.update(datos["gyro_z"])
     datos["temp_1"] = temperature1.update(datos["temp_1"])
     datos["temp_2"] = temperature2.update(datos["temp_2"])
     datos["proximidad"] = proximity.update(datos["proximidad"])
