@@ -24,7 +24,7 @@ voltage = ButterworthFilter(50,5,2)
 temperature1 = ButterworthFilter(5,0.5,2)
 temperature2 = ButterworthFilter(5,0.5,2)
 proximity = ButterworthFilter(30,5,2)
-extra = ButterworthFilter(20,1,4)
+extra = ButterworthFilter(50,5,2)
 
 def filtrado (datos):
     datos["accel_x"] = imu_x.update(datos["accel_x"])                 # Se filtra cada uno dependiendo el sensor
