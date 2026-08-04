@@ -1,0 +1,122 @@
+=========================================
+REPORTE DEL ANÁLISIS DE DATA ACQUISITION
+=========================================
+
+Equipo: AURIGA Racing
+
+-----------------------------------------
+1. Dataframe
+-----------------------------------------
+
+El dataframe fue obtenido a partir
+de los datos obtenidos por los sensores y
+procesador por el ESP-32.
+
+Rondas de datos obtenidos: 40
+-----------------------------------------
+2. Signal Filtering
+-----------------------------------------
+
+El dataframe fue filtrado usando un filtro
+Butterworth sosfilt para eliminar el ruido.
+
+Orden: 2
+Cuttoff frequency: 
+    IMU: 20Hz
+     Voltaje: 5 Hz 
+     Temperatura: 0.5 Hz
+     Proximidad: 5 Hz
+     Campos Magnéticos: 5 Hz
+Sampling frequency: 
+    IMU: 200Hz
+     Voltaje: 50 Hz 
+     Temperatura: 5 Hz
+     Proximidad: 30 Hz
+     Campos Magnéticos: 50 Hz
+
+-----------------------------------------
+3. Maximum G Force
+-----------------------------------------
+
+Se calcula la magnitud de la fuerza G en todos
+los puntos y se determina el valor máximo.
+
+Fuerza máxima calculada: 1.6315751736261532 G
+
+-----------------------------------------
+4. IMU Failure Detection
+-----------------------------------------
+
+Se analizaron las series de datos
+seleccionadas del dataframe en busca de
+caídas o errores de los sensores IMU.
+
+Persistence threshold: 100 ms
+Columnas analizadas: 6
+
+-----------
+accel_x
+-----------
+Eventos detectados: 1
+
+Evento 1:
+Inicio: 1785875155187
+Final: 1785875159540
+Duración: 4353 s
+
+-----------
+accel_y
+-----------
+Eventos detectados: 1
+
+Evento 1:
+Inicio: 1785875155187
+Final: 1785875159540
+Duración: 4353 s
+
+-----------
+accel_z
+-----------
+Eventos detectados: 1
+
+Evento 1:
+Inicio: 1785875155187
+Final: 1785875159540
+Duración: 4353 s
+
+-----------
+gyro_x
+-----------
+Eventos detectados: 1
+
+Evento 1:
+Inicio: 1785875155187
+Final: 1785875159540
+Duración: 4353 s
+
+-----------
+gyro_y
+-----------
+Eventos detectados: 1
+
+Evento 1:
+Inicio: 1785875155187
+Final: 1785875159540
+Duración: 4353 s
+
+-----------
+gyro_z
+-----------
+Eventos detectados: 1
+
+Evento 1:
+Inicio: 1785875155187
+Final: 1785875159540
+Duración: 4353 s
+
+-----------------------------------------
+
+=========================================
+FIN DEL REPORTE
+=========================================
+

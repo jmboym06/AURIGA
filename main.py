@@ -6,7 +6,9 @@ from src.create_db import createdb
 from src.database import database_add
 from src.filtros import filtrado
 from src.sender_dash import send_data
-import os
+from analysis import analysis
+import pandas as pd
+from datetime import datetime
 
 connection1 = sqlite3.connect('aurigadb.sqlite') # Conectamos con el database para poder usarlo
 cursor1 = connection1.cursor()                    # Cursor para editar la database
@@ -76,7 +78,6 @@ async def handler_micro(websocket_in):
         print("Cliente desconectado")
 
 
-
 async def main_micro():
 
     async with websockets.serve(handler_micro, "0.0.0.0", 8765):      # Crea un servidor WebSocket que acepta conexiones desde cualquier interfaz de red
@@ -85,6 +86,24 @@ async def main_micro():
         await asyncio.Future()                                  # Mantiene vivo el servidor
 
 async def main():
-    await asyncio.gather(main_micro(), main_dash())             # Para ejecutar ambos servidores a la vez
+    try:
+        await asyncio.gather(main_micro(), main_dash())             # Para ejecutar ambos servidores a la vez
+    finally:
+        df1 = pd.read_sql_query("SELECT * FROM TELEMETRIA", connection2)
+
+        csv_file_filt = f"TELEMETRIA/telemetria_filt_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.csv"
+        df1.to_csv(csv_file_filt, index=False)
+
+        df2 = pd.read_sql_query("SELECT * FROM TELEMETRIA", connection1)
+
+        csv_file_raw = f"TELEMETRIA/telemetria_raw_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.csv"
+        df2.to_csv(csv_file_raw, index=False)
+
+        print("CSV guardado correctamente")
+
+        analysis(csv_file_filt, csv_file_raw)
+
+        connection1.close()
+        connection2.close()
 
 asyncio.run(main())                                             # Corre el la función main
