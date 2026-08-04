@@ -6,6 +6,7 @@ from src.create_db import createdb
 from src.database import database_add
 from src.filtros import filtrado
 from src.sender_dash import send_data
+import os
 
 connection1 = sqlite3.connect('aurigadb.sqlite') # Conectamos con el database para poder usarlo
 cursor1 = connection1.cursor()                    # Cursor para editar la database
@@ -34,9 +35,15 @@ async def main_dash():
         await asyncio.Future()                                  # Mantiene vivo el servidor
 
 async def handler_micro(websocket_in):
-    async for data in websocket_in:              # Conecta con el WebScoket para recibir los datos del microcontrolador
-        try:
+
+    print("Cliente conectado al servidor")
+
+    try:
+        async for data in websocket_in:              # Conecta con el WebScoket para recibir los datos del microcontrolador
+            print("Mensaje Recibido")
+            print(repr(data))
             datos = json.loads(data)                    # Traduce el archivo JSON para poderlo procesar 
+            print(f"JSON transformado:{datos}")
 
             database_add(datos, cursor1)              # Añade los datos de ese pack de datos a la database
 
@@ -56,14 +63,17 @@ async def handler_micro(websocket_in):
 
             database_add(datosf, cursor2)              # Añade los datos de ese pack de datos a la database
 
-
+            print(f"Datos filtrados: {datosf}")
             connection1.commit()                         # Confirma el cambio
             connection2.commit()
 
             await send_data(dashboards, datosf)       # Manda los datos al websocket del dashboard
 
-        except Exception as e:
-            print(f"Error [handler_micro]: {e}")      # Por si ocurre un error
+    except Exception as e:
+        print(f"Error [handler_micro]: {e}")      # Por si ocurre un error
+
+    finally:
+        print("Cliente desconectado")
 
 
 
