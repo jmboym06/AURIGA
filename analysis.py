@@ -15,6 +15,9 @@ def analysis(csvf, csvr):
     dataf["accel_mag"] = np.sqrt(dataf["accel_x"]**2 + dataf["accel_y"]**2)      # Teorema de pitágoras
     max_G_force = dataf["accel_mag"].max()     # Calcula la magnitud de la aceleración en cada instante
 
+    max_temp1 = dataf["temp_1"].max()           # Encuentra la temperatura máxima
+    max_temp2 = dataf["temp_2"].max()
+
     plot_filter(datar, dataf, "accel_x")     # Visualizamos la diferencia entre los datos crudos y los datos filtrados con graficas
     plot_filter(datar, dataf, "accel_y")
 
@@ -28,4 +31,4 @@ def analysis(csvf, csvr):
     error_imu["gyro_y"] = deteccion_fallo_imu(datar, "gyro_y")
     error_imu["gyro_z"] = deteccion_fallo_imu(datar, "gyro_z")
 
-    generate_report(len(dataf), max_G_force, error_imu)  # Genera un reporte de lo realizado
+    generate_report(len(dataf), max_G_force, max_temp1, max_temp2, error_imu)  # Genera un reporte de lo realizado

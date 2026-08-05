@@ -1,4 +1,4 @@
-def generate_report(len_data, max_f_g, imu_errors):  # Datos de lo realizado en el proyecto
+def generate_report(len_data, max_f_g, max_t1, max_t2, imu_errors):  # Datos de lo realizado en el proyecto
     
     with open("report.txt", "w") as report:             # Creación de un reporte genérico para enumerar lo realizado
         report.write("=========================================\n")
@@ -47,11 +47,15 @@ def generate_report(len_data, max_f_g, imu_errors):  # Datos de lo realizado en 
                     report.write(f"Duración: {imu_errors[element][1][counter] - imu_errors[element][0][counter]} s\n\n")
                     counter += 1
         report.write("-----------------------------------------\n\n")
-
+        report.write("5. Critical Temperatures\n")
+        report.write("-----------------------------------------\n\n")
+        report.write("Se analizaron las series de datos\nseleccionadas del dataframe en busca de\nlos valores máximos de temperatura.\n\n")
+        report.write(f"Temperatura máxima del sensor 1: {max_t1}\n")
+        report.write(f"Temperatura máxima del sensor 2: {max_t2}\n\n")
         report.write("=========================================\n")
         report.write("FIN DEL REPORTE\n")
         report.write("=========================================\n\n")
-    
+
     import os
 
     os.startfile("report.txt")
