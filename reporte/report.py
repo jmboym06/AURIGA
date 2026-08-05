@@ -12,7 +12,7 @@ def generate_report(len_data, max_f_g, max_t1, max_t2, imu_errors):  # Datos de 
         report.write(f"Rondas de datos obtenidos: {len_data}\n")
 
         if len_data == 0:
-            report.write("No se detectaron registros inválidos\n\n")
+            report.write("No se detectaron registros válidos\n\n")
         report.write("-----------------------------------------\n")
         report.write("2. Signal Filtering\n")
         report.write("-----------------------------------------\n\n")
